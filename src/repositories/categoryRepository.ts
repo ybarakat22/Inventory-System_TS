@@ -4,4 +4,7 @@ export const CategoryRepository = {
   async create(data: ICategory) {
     return Category.create(data);
   },
+  async read() {
+    return Category.find({});
+  },
 };

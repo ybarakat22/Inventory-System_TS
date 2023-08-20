@@ -6,11 +6,17 @@ interface CategoryResponse {
   name: string;
   id: ObjectId;
 }
-export const categoryMapper = (category :CategoryDocument): CategoryResponse => {
+export const categoryMapper = (categories :CategoryDocument[]): CategoryResponse[] => {
 
-  const categoryResponse:CategoryResponse = {
-    name: category.name,
-    id: category._id
-  };
-  return categoryResponse;
+  const categoryResponses: CategoryResponse[] = [];
+  for (const category of categories) {
+
+    const categoryResponse: CategoryResponse = {
+      name: category.name,
+      id: category._id
+    };
+    categoryResponses.push(categoryResponse);
+  }
+
+  return categoryResponses;
 };

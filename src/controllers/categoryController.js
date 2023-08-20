@@ -42,7 +42,7 @@ var categoryMapper_1 = require("../mappers/categoryMapper");
 exports.CategoryController = {
     createCategory: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var name_1, category, categoryResponse, error_1;
+            var name_1, rawCategoryData, category, categoryResponse, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -50,12 +50,36 @@ exports.CategoryController = {
                         name_1 = req.body.name;
                         return [4 /*yield*/, categoryRepository_1.CategoryRepository.create({ name: name_1 })];
                     case 1:
-                        category = _a.sent();
+                        rawCategoryData = _a.sent();
+                        category = [];
+                        category.push(rawCategoryData);
                         categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
                         res.status(201).send(categoryResponse);
                         return [3 /*break*/, 3];
                     case 2:
                         error_1 = _a.sent();
+                        res.status(500).send({ message: "Server Error" });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    },
+    readCategories: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var categories, categoryResponses, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.read()];
+                    case 1:
+                        categories = _a.sent();
+                        categoryResponses = (0, categoryMapper_1.categoryMapper)(categories);
+                        res.status(201).send(categoryResponses);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _a.sent();
                         res.status(500).send({ message: "Server Error" });
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];

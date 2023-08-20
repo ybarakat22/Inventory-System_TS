@@ -5,4 +5,5 @@ var validationMiddleware_1 = require("../middleware/validationMiddleware");
 var express = require("express");
 var router = express.Router();
 router.post("/categories", validationMiddleware_1.validateInput, categoryController_1.CategoryController.createCategory);
+router.get("/categories", categoryController_1.CategoryController.readCategories);
 exports["default"] = router;

@@ -5,5 +5,6 @@ import express = require("express");
 const router = express.Router();
 
 router.post("/categories", validateInput, CategoryController.createCategory);
+router.get("/categories", CategoryController.readCategories);
 
 export default router;

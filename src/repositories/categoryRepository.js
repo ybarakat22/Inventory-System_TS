@@ -45,5 +45,12 @@ exports.CategoryRepository = {
                 return [2 /*return*/, category_1.Category.create(data)];
             });
         });
+    },
+    read: function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, category_1.Category.find({})];
+            });
+        });
     }
 };
