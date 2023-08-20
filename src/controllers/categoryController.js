@@ -86,5 +86,89 @@ exports.CategoryController = {
                 }
             });
         });
+    },
+    deleteCategory: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var categoryId, rawCategoryData, category, categoryResponse, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        categoryId = req.params.id;
+                        return [4 /*yield*/, categoryRepository_1.CategoryRepository["delete"](categoryId)];
+                    case 1:
+                        rawCategoryData = _a.sent();
+                        if (!rawCategoryData) {
+                            return [2 /*return*/, res.status(404).send({ message: 'Category not found' })];
+                        }
+                        category = [];
+                        category.push(rawCategoryData);
+                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
+                        res.status(200).send(categoryResponse);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_3 = _a.sent();
+                        res.status(500).send({ message: "Server Error" });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    },
+    readCategory: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var categoryId, rawCategoryData, category, categoryResponse, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        categoryId = req.params.id;
+                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.show(categoryId)];
+                    case 1:
+                        rawCategoryData = _a.sent();
+                        if (!rawCategoryData) {
+                            return [2 /*return*/, res.status(404).send({ message: 'Category not found' })];
+                        }
+                        category = [];
+                        category.push(rawCategoryData);
+                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
+                        res.status(200).send(categoryResponse);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        res.status(500).send({ message: "Server Error" });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    },
+    updateCategory: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var categoryId, rawCategoryData, category, categoryResponse, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        categoryId = req.params.id;
+                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.update(categoryId, req.body.name)];
+                    case 1:
+                        rawCategoryData = _a.sent();
+                        if (!rawCategoryData) {
+                            return [2 /*return*/, res.status(404).send({ message: 'Category not found' })];
+                        }
+                        category = [];
+                        category.push(rawCategoryData);
+                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
+                        res.status(200).send(categoryResponse);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_5 = _a.sent();
+                        res.status(500).send({ message: "Server Error" });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     }
 };

@@ -52,5 +52,26 @@ exports.CategoryRepository = {
                 return [2 /*return*/, category_1.Category.find({})];
             });
         });
+    },
+    "delete": function (categoryId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, category_1.Category.findByIdAndDelete({ _id: categoryId })];
+            });
+        });
+    },
+    show: function (categoryId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, category_1.Category.findById({ _id: categoryId })];
+            });
+        });
+    },
+    update: function (categoryId, name) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, category_1.Category.findByIdAndUpdate({ _id: categoryId }, { name: name }, { "new": true })];
+            });
+        });
     }
 };
