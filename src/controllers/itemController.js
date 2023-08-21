@@ -36,26 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.CategoryController = void 0;
-var categoryRepository_1 = require("../repositories/categoryRepository");
-var categoryMapper_1 = require("../mappers/categoryMapper");
+exports.ItemController = void 0;
+var itemRepository_1 = require("../repositories/itemRepository");
+var itemMapper_1 = require("../mappers/itemMapper");
 var helper_1 = require("../utils/helper");
-exports.CategoryController = {
-    createCategory: function (req, res) {
+exports.ItemController = {
+    createItem: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var name_1, rawCategoryData, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a, name_1, categoryId, rawItemData, error_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        name_1 = req.body.name;
-                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.create({ name: name_1 })];
+                        _b.trys.push([0, 2, , 3]);
+                        _a = req.body, name_1 = _a.name, categoryId = _a.categoryId;
+                        return [4 /*yield*/, itemRepository_1.ItemRepository.create({ name: name_1, categoryId: categoryId })];
                     case 1:
-                        rawCategoryData = _a.sent();
-                        (0, helper_1.formatCategory)(res, rawCategoryData, true);
+                        rawItemData = _b.sent();
+                        (0, helper_1.formatItem)(res, rawItemData, true);
                         return [3 /*break*/, 3];
                     case 2:
-                        error_1 = _a.sent();
+                        error_1 = _b.sent();
                         res.status(500).send({ message: "Server Error" });
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -63,18 +63,18 @@ exports.CategoryController = {
             });
         });
     },
-    readCategories: function (req, res) {
+    readItems: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categories, categoryResponses, error_2;
+            var items, itemResponses, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.read()];
+                        return [4 /*yield*/, itemRepository_1.ItemRepository.read()];
                     case 1:
-                        categories = _a.sent();
-                        categoryResponses = (0, categoryMapper_1.CategoryMapper)(categories);
-                        res.status(200).send(categoryResponses);
+                        items = _a.sent();
+                        itemResponses = (0, itemMapper_1.ItemMapper)(items);
+                        res.status(200).send(itemResponses);
                         return [3 /*break*/, 3];
                     case 2:
                         error_2 = _a.sent();
@@ -85,18 +85,18 @@ exports.CategoryController = {
             });
         });
     },
-    deleteCategory: function (req, res) {
+    deleteItem: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categoryId, rawCategoryData, error_3;
+            var categoryId, rawItemData, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         categoryId = req.params.id;
-                        return [4 /*yield*/, categoryRepository_1.CategoryRepository["delete"](categoryId)];
+                        return [4 /*yield*/, itemRepository_1.ItemRepository["delete"](categoryId)];
                     case 1:
-                        rawCategoryData = _a.sent();
-                        (0, helper_1.formatCategory)(res, rawCategoryData, false);
+                        rawItemData = _a.sent();
+                        (0, helper_1.formatItem)(res, rawItemData, false);
                         return [3 /*break*/, 3];
                     case 2:
                         error_3 = _a.sent();
@@ -107,18 +107,18 @@ exports.CategoryController = {
             });
         });
     },
-    readCategory: function (req, res) {
+    readItem: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categoryId, rawCategoryData, error_4;
+            var itemId, rawItemData, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        categoryId = req.params.id;
-                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.show(categoryId)];
+                        itemId = req.params.id;
+                        return [4 /*yield*/, itemRepository_1.ItemRepository.show(itemId)];
                     case 1:
-                        rawCategoryData = _a.sent();
-                        (0, helper_1.formatCategory)(res, rawCategoryData, false);
+                        rawItemData = _a.sent();
+                        (0, helper_1.formatItem)(res, rawItemData, false);
                         return [3 /*break*/, 3];
                     case 2:
                         error_4 = _a.sent();
@@ -129,18 +129,18 @@ exports.CategoryController = {
             });
         });
     },
-    updateCategory: function (req, res) {
+    updateItem: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categoryId, rawCategoryData, error_5;
+            var itemId, rawItemData, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        categoryId = req.params.id;
-                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.update(categoryId, req.body.name)];
+                        itemId = req.params.id;
+                        return [4 /*yield*/, itemRepository_1.ItemRepository.update(itemId, req.body.name)];
                     case 1:
-                        rawCategoryData = _a.sent();
-                        (0, helper_1.formatCategory)(res, rawCategoryData, false);
+                        rawItemData = _a.sent();
+                        (0, helper_1.formatItem)(res, rawItemData, false);
                         return [3 /*break*/, 3];
                     case 2:
                         error_5 = _a.sent();

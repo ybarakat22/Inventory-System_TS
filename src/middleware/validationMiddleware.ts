@@ -1,5 +1,6 @@
 import express = require("express");
 import { Category } from "../models/category";
+import { CategoryRepository } from "../repositories/categoryRepository";
 
 export const validationMiddleware = {
   validateInput(
@@ -32,12 +33,17 @@ export const validationMiddleware = {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const id = req.params.id;
-
-    const category = await Category.findOne({ _id: id });
-    if (!category) {
-      return res.status(404).send({ message: "Invalid Object Id" });
+    
+    const id = req.body.categoryId;
+    if (!id) {
+      return res.status(404).send({ message: "Missing categoryId parameter" });
     }
+
+    const category = await CategoryRepository.show(id);
+    if (!category) {
+      return res.status(400).send({ message: "Invalid Category Refrence" });
+    }
+
     next();
   },
 };

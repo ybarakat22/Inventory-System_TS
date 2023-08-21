@@ -36,43 +36,41 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.validationMiddleware = void 0;
-var categoryRepository_1 = require("../repositories/categoryRepository");
-exports.validationMiddleware = {
-    validateInput: function (req, res, next) {
-        var name = req.body.name;
-        if (!name) {
-            return res.status(400).json({ message: "Invalid input" });
-        }
-        next();
-    },
-    validateId: function (req, res, next) {
-        var id = req.params.id;
-        var validIdRegex = /^[0-9a-fA-F]{24}$/;
-        if (!validIdRegex.test(id)) {
-            return res.status(400).send({ message: "Invalid Object Id" });
-        }
-        next();
-    },
-    validateCategoryReference: function (req, res, next) {
+exports.ItemRepository = void 0;
+var item_1 = require("../models/item");
+exports.ItemRepository = {
+    create: function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, category;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        id = req.body.categoryId;
-                        if (!id) {
-                            return [2 /*return*/, res.status(404).send({ message: "Missing categoryId parameter" })];
-                        }
-                        return [4 /*yield*/, categoryRepository_1.CategoryRepository.show(id)];
-                    case 1:
-                        category = _a.sent();
-                        if (!category) {
-                            return [2 /*return*/, res.status(400).send({ message: "Invalid Category Refrence" })];
-                        }
-                        next();
-                        return [2 /*return*/];
-                }
+                return [2 /*return*/, item_1.Item.create(data)];
+            });
+        });
+    },
+    read: function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, item_1.Item.find({})];
+            });
+        });
+    },
+    "delete": function (itemId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, item_1.Item.findByIdAndDelete({ _id: itemId })];
+            });
+        });
+    },
+    show: function (itemId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, item_1.Item.findById({ _id: itemId })];
+            });
+        });
+    },
+    update: function (itemId, name) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, item_1.Item.findByIdAndUpdate({ _id: itemId }, { name: name }, { "new": true })];
             });
         });
     }

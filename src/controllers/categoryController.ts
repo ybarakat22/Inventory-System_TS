@@ -1,6 +1,6 @@
 import express = require("express");
 import { CategoryRepository } from "../repositories/categoryRepository";
-import { categoryMapper } from "../mappers/categoryMapper";
+import { CategoryMapper } from "../mappers/categoryMapper";
 import { formatCategory } from "../utils/helper";
 
 export const CategoryController = {
@@ -18,7 +18,7 @@ export const CategoryController = {
   async readCategories(req: express.Request, res: express.Response) {
     try {
       const categories = await CategoryRepository.read();
-      const categoryResponses = categoryMapper(categories);
+      const categoryResponses = CategoryMapper(categories);
 
       res.status(200).send(categoryResponses);
     } catch (error) {

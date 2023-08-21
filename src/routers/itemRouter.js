@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var itemController_1 = require("../controllers/itemController");
+var validationMiddleware_1 = require("../middleware/validationMiddleware");
+var express = require("express");
+var router = express.Router();
+router.post("/items", validationMiddleware_1.validationMiddleware.validateInput, validationMiddleware_1.validationMiddleware.validateCategoryReference, itemController_1.ItemController.createItem);
+router.get("/items", itemController_1.ItemController.readItems);
+router["delete"]("/items/:id", validationMiddleware_1.validationMiddleware.validateId, itemController_1.ItemController.deleteItem);
+router.get("/items/:id", validationMiddleware_1.validationMiddleware.validateId, itemController_1.ItemController.readItem);
+router.patch("/items/:id", validationMiddleware_1.validationMiddleware.validateId, validationMiddleware_1.validationMiddleware.validateInput, itemController_1.ItemController.updateItem);
+exports["default"] = router;

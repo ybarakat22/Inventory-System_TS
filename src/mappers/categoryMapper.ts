@@ -6,7 +6,7 @@ interface CategoryResponse {
   name: string;
   id: ObjectId;
 }
-export const categoryMapper = (categories :CategoryDocument[]): CategoryResponse[] => {
+export const CategoryMapper = (categories :CategoryDocument[]): CategoryResponse[] => {
 
   const categoryResponses: CategoryResponse[] = [];
   for (const category of categories) {
