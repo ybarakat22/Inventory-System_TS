@@ -2,8 +2,8 @@ const express = require('express');
 const AdminBro = require('admin-bro');
 const AdminBroMongoose = require('@admin-bro/mongoose');
 const AdminBroExpress= require('@admin-bro/express');
-import * as mongoose from 'mongoose'
 const dotenv = require('dotenv')
+const mongoose = require('mongoose');
 
 dotenv.config({ path: './.env' })
 
