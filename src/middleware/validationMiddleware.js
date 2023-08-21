@@ -47,6 +47,14 @@ exports.validationMiddleware = {
         next();
     },
     validateId: function (req, res, next) {
+        var id = req.params.id;
+        var validIdRegex = /^[0-9a-fA-F]{24}$/;
+        if (!validIdRegex.test(id)) {
+            return res.status(400).send({ message: "Invalid Object Id" });
+        }
+        next();
+    },
+    validateCategoryReference: function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
             var id, category;
             return __generator(this, function (_a) {
@@ -57,7 +65,7 @@ exports.validationMiddleware = {
                     case 1:
                         category = _a.sent();
                         if (!category) {
-                            return [2 /*return*/, res.status(404).send({ message: "This object Id is invalid" })];
+                            return [2 /*return*/, res.status(404).send({ message: "Invalid Object Id" })];
                         }
                         next();
                         return [2 /*return*/];

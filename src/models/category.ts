@@ -2,7 +2,7 @@ import * as Mongoose from "mongoose";
 import { ObjectId } from 'mongodb';
 
 export type CategoryDocument = {
-  _id: ObjectId;
+  _id: ObjectId ;
   name: string;
 };
 interface ICategory {

@@ -39,10 +39,11 @@ exports.__esModule = true;
 exports.CategoryController = void 0;
 var categoryRepository_1 = require("../repositories/categoryRepository");
 var categoryMapper_1 = require("../mappers/categoryMapper");
+var helper_1 = require("../utils/helper");
 exports.CategoryController = {
     createCategory: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var name_1, rawCategoryData, category, categoryResponse, error_1;
+            var name_1, rawCategoryData, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -51,10 +52,7 @@ exports.CategoryController = {
                         return [4 /*yield*/, categoryRepository_1.CategoryRepository.create({ name: name_1 })];
                     case 1:
                         rawCategoryData = _a.sent();
-                        category = [];
-                        category.push(rawCategoryData);
-                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
-                        res.status(201).send(categoryResponse);
+                        (0, helper_1.formatCategory)(res, rawCategoryData, true);
                         return [3 /*break*/, 3];
                     case 2:
                         error_1 = _a.sent();
@@ -76,7 +74,7 @@ exports.CategoryController = {
                     case 1:
                         categories = _a.sent();
                         categoryResponses = (0, categoryMapper_1.categoryMapper)(categories);
-                        res.status(201).send(categoryResponses);
+                        res.status(200).send(categoryResponses);
                         return [3 /*break*/, 3];
                     case 2:
                         error_2 = _a.sent();
@@ -89,7 +87,7 @@ exports.CategoryController = {
     },
     deleteCategory: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categoryId, rawCategoryData, category, categoryResponse, error_3;
+            var categoryId, rawCategoryData, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -98,13 +96,7 @@ exports.CategoryController = {
                         return [4 /*yield*/, categoryRepository_1.CategoryRepository["delete"](categoryId)];
                     case 1:
                         rawCategoryData = _a.sent();
-                        if (!rawCategoryData) {
-                            return [2 /*return*/, res.status(404).send({ message: 'Category not found' })];
-                        }
-                        category = [];
-                        category.push(rawCategoryData);
-                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
-                        res.status(200).send(categoryResponse);
+                        (0, helper_1.formatCategory)(res, rawCategoryData, false);
                         return [3 /*break*/, 3];
                     case 2:
                         error_3 = _a.sent();
@@ -117,7 +109,7 @@ exports.CategoryController = {
     },
     readCategory: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categoryId, rawCategoryData, category, categoryResponse, error_4;
+            var categoryId, rawCategoryData, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -126,13 +118,7 @@ exports.CategoryController = {
                         return [4 /*yield*/, categoryRepository_1.CategoryRepository.show(categoryId)];
                     case 1:
                         rawCategoryData = _a.sent();
-                        if (!rawCategoryData) {
-                            return [2 /*return*/, res.status(404).send({ message: 'Category not found' })];
-                        }
-                        category = [];
-                        category.push(rawCategoryData);
-                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
-                        res.status(200).send(categoryResponse);
+                        (0, helper_1.formatCategory)(res, rawCategoryData, false);
                         return [3 /*break*/, 3];
                     case 2:
                         error_4 = _a.sent();
@@ -145,7 +131,7 @@ exports.CategoryController = {
     },
     updateCategory: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var categoryId, rawCategoryData, category, categoryResponse, error_5;
+            var categoryId, rawCategoryData, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -154,13 +140,7 @@ exports.CategoryController = {
                         return [4 /*yield*/, categoryRepository_1.CategoryRepository.update(categoryId, req.body.name)];
                     case 1:
                         rawCategoryData = _a.sent();
-                        if (!rawCategoryData) {
-                            return [2 /*return*/, res.status(404).send({ message: 'Category not found' })];
-                        }
-                        category = [];
-                        category.push(rawCategoryData);
-                        categoryResponse = (0, categoryMapper_1.categoryMapper)(category);
-                        res.status(200).send(categoryResponse);
+                        (0, helper_1.formatCategory)(res, rawCategoryData, false);
                         return [3 /*break*/, 3];
                     case 2:
                         error_5 = _a.sent();

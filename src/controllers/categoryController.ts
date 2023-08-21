@@ -1,7 +1,7 @@
 import express = require("express");
 import { CategoryRepository } from "../repositories/categoryRepository";
 import { categoryMapper } from "../mappers/categoryMapper";
-import { CategoryDocument } from "../models/category";
+import { formatCategory } from "../utils/helper";
 
 export const CategoryController = {
   async createCategory(req: express.Request, res: express.Response) {
@@ -9,12 +9,7 @@ export const CategoryController = {
       const { name } = req.body;
       const rawCategoryData = await CategoryRepository.create({ name });
 
-      const category: CategoryDocument[] = [];
-      category.push(rawCategoryData);
-
-      const categoryResponse = categoryMapper(category);
-
-      res.status(201).send(categoryResponse);
+      formatCategory(res, rawCategoryData, true);
     } catch (error) {
       res.status(500).send({ message: "Server Error" });
     }
@@ -25,7 +20,7 @@ export const CategoryController = {
       const categories = await CategoryRepository.read();
       const categoryResponses = categoryMapper(categories);
 
-      res.status(201).send(categoryResponses);
+      res.status(200).send(categoryResponses);
     } catch (error) {
       res.status(500).send({ message: "Server Error" });
     }
@@ -36,16 +31,7 @@ export const CategoryController = {
       const categoryId: string = req.params.id;
       const rawCategoryData = await CategoryRepository.delete(categoryId);
 
-      if (!rawCategoryData) {
-        return res.status(404).send({message: 'Category not found'});
-      }
-
-      const category: CategoryDocument[] = [];
-      category.push(rawCategoryData)
-
-      const categoryResponse = categoryMapper(category);
-
-      res.status(200).send(categoryResponse);
+      formatCategory(res, rawCategoryData, false);
     } catch (error) {
       res.status(500).send({ message: "Server Error" });
     }
@@ -54,18 +40,10 @@ export const CategoryController = {
   async readCategory(req: express.Request, res: express.Response) {
     try {
       const categoryId: string = req.params.id;
+
       const rawCategoryData = await CategoryRepository.show(categoryId);
 
-      if (!rawCategoryData) {
-        return res.status(404).send({message: 'Category not found'});
-      }
-
-      const category: CategoryDocument[] = [];
-      category.push(rawCategoryData)
-
-      const categoryResponse = categoryMapper(category);
-
-      res.status(200).send(categoryResponse);
+      formatCategory(res, rawCategoryData, false);
     } catch (error) {
       res.status(500).send({ message: "Server Error" });
     }
@@ -74,17 +52,12 @@ export const CategoryController = {
   async updateCategory(req: express.Request, res: express.Response) {
     try {
       const categoryId: string = req.params.id;
-      const rawCategoryData = await CategoryRepository.update(categoryId , req.body.name);
+      const rawCategoryData = await CategoryRepository.update(
+        categoryId,
+        req.body.name
+      );
 
-      if (!rawCategoryData) {
-        return res.status(404).send({message: 'Category not found'});
-      }
-      const category: CategoryDocument[] = [];
-      category.push(rawCategoryData)
-
-      const categoryResponse = categoryMapper(category);
-
-      res.status(200).send(categoryResponse);
+      formatCategory(res, rawCategoryData, false);
     } catch (error) {
       res.status(500).send({ message: "Server Error" });
     }
