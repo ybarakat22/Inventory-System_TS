@@ -1,4 +1,10 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -11,30 +17,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryRepository = void 0;
 const category_1 = require("../models/category");
-exports.CategoryRepository = {
+const inversify_1 = require("inversify");
+let CategoryRepository = class CategoryRepository {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
             return category_1.Category.create(data);
         });
-    },
+    }
     read() {
         return __awaiter(this, void 0, void 0, function* () {
             return category_1.Category.find({});
         });
-    },
+    }
     delete(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             return category_1.Category.findByIdAndDelete({ _id: categoryId });
         });
-    },
+    }
     show(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             return category_1.Category.findById({ _id: categoryId });
         });
-    },
+    }
     update(categoryId, name) {
         return __awaiter(this, void 0, void 0, function* () {
             return category_1.Category.findByIdAndUpdate({ _id: categoryId }, { name }, { new: true });
         });
-    },
+    }
 };
+CategoryRepository = __decorate([
+    (0, inversify_1.injectable)()
+], CategoryRepository);
+exports.CategoryRepository = CategoryRepository;
+;

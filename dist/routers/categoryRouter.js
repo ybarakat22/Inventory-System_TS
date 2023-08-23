@@ -1,12 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const categoryController_1 = require("../controllers/categoryController");
-const validationMiddleware_1 = require("../middleware/validationMiddleware");
-const express = require("express");
-const router = express.Router();
-router.post("/categories", validationMiddleware_1.validationMiddleware.validateInput, categoryController_1.CategoryController.createCategory);
-router.get("/categories", categoryController_1.CategoryController.readCategories);
-router.delete("/categories/:id", validationMiddleware_1.validationMiddleware.validateId, categoryController_1.CategoryController.deleteCategory);
-router.get("/categories/:id", validationMiddleware_1.validationMiddleware.validateId, categoryController_1.CategoryController.readCategory);
-router.patch("/categories/:id", validationMiddleware_1.validationMiddleware.validateId, validationMiddleware_1.validationMiddleware.validateInput, categoryController_1.CategoryController.updateCategory);
-exports.default = router;
+// import { CategoryController } from "../controllers/categoryController";
+// import {ValidationMiddleware}  from "../middleware/validationMiddleware"
+// import express = require("express");
+// const router = express.Router();
+// const categoryController =  new CategoryController();
+// router.post("/categories", ValidationMiddleware.validateInput, categoryController.createCategory);
+// router.get("/categories", categoryController.readCategories);
+// router.delete("/categories/:id",ValidationMiddleware.validateId, categoryController.deleteCategory);
+// router.get("/categories/:id", ValidationMiddleware.validateId , categoryController.readCategory);
+// router.patch("/categories/:id",ValidationMiddleware.validateId ,ValidationMiddleware.validateInput , categoryController.updateCategory);
+// export default router;

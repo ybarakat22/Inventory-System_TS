@@ -1,13 +1,14 @@
-import { CategoryController } from "../controllers/categoryController";
-import {validationMiddleware}  from "../middleware/validationMiddleware"
-import express = require("express");
+// import { CategoryController } from "../controllers/categoryController";
+// import {ValidationMiddleware}  from "../middleware/validationMiddleware"
+// import express = require("express");
 
-const router = express.Router();
+// const router = express.Router();
+// const categoryController =  new CategoryController();
 
-router.post("/categories", validationMiddleware.validateInput, CategoryController.createCategory);
-router.get("/categories", CategoryController.readCategories);
-router.delete("/categories/:id",validationMiddleware.validateId, CategoryController.deleteCategory);
-router.get("/categories/:id", validationMiddleware.validateId , CategoryController.readCategory);
-router.patch("/categories/:id",validationMiddleware.validateId ,validationMiddleware.validateInput , CategoryController.updateCategory);
+// router.post("/categories", ValidationMiddleware.validateInput, categoryController.createCategory);
+// router.get("/categories", categoryController.readCategories);
+// router.delete("/categories/:id",ValidationMiddleware.validateId, categoryController.deleteCategory);
+// router.get("/categories/:id", ValidationMiddleware.validateId , categoryController.readCategory);
+// router.patch("/categories/:id",ValidationMiddleware.validateId ,ValidationMiddleware.validateInput , categoryController.updateCategory);
 
-export default router;
+// export default router;

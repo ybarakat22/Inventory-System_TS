@@ -1,23 +1,24 @@
 import { Category ,ICategory} from "../models/category";
-import express = require("express");
+import { injectable, inject } from 'inversify';
 
-export const CategoryRepository = {
+@injectable()
+export class CategoryRepository {
 
-  async create(data: ICategory) {
+  public async create(data: ICategory) {
     return Category.create(data);
-  },
-  async read() {
+  }
+  public async read() {
     return Category.find({});
-  },
-  async delete(categoryId: string) {
+  }
+  public async delete(categoryId: string) {
     return Category.findByIdAndDelete({_id :categoryId});
-  },
-  async show(categoryId: string) {
+  }
+  public async show(categoryId: string) {
     return Category.findById({_id :categoryId});
-  },
+  }
 
   async update(categoryId: string , name: string) {
  
     return Category.findByIdAndUpdate({_id :categoryId} , {name}, { new: true})
-  },
+  }
 };

@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validationMiddleware = void 0;
-const categoryRepository_1 = require("../repositories/categoryRepository");
-exports.validationMiddleware = {
+exports.ValidationMiddleware = void 0;
+const category_1 = require("../models/category");
+exports.ValidationMiddleware = {
     validateInput(req, res, next) {
         const name = req.body.name;
         if (!name) {
@@ -27,13 +27,21 @@ exports.validationMiddleware = {
         }
         next();
     },
+    validateReferenceId(req, res, next) {
+        const id = req.body.categoryId;
+        const validIdRegex = /^[0-9a-fA-F]{24}$/;
+        if (!validIdRegex.test(id)) {
+            return res.status(400).send({ message: "Invalid Object Id" });
+        }
+        next();
+    },
     validateCategoryReference(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = req.body.categoryId;
             if (!id) {
                 return res.status(404).send({ message: "Missing categoryId parameter" });
             }
-            const category = yield categoryRepository_1.CategoryRepository.show(id);
+            const category = yield category_1.Category.findById({ _id: id });
             if (!category) {
                 return res.status(400).send({ message: "Invalid Category Refrence" });
             }
